@@ -1,0 +1,61 @@
+.
+├── CHANGES_SUMMARY.md
+├── DEPLOYMENT_INSTRUCTIONS.md
+├── DOWNLOAD_AND_UPDATE_GUIDE.md
+├── DOWNLOAD_INSTRUCTIONS.md
+├── DOWNLOAD_PAGE.html
+├── EMERGENCY_UPDATE.bat
+├── FINAL_CHANGES.md
+├── GITHUB_SETUP.md
+├── GIT_BASH_COMMANDS.txt
+├── HOW_TO_RUN_LOCALLY.md
+├── PREVIEW_GUIDE.md
+├── PROJECT_SUMMARY.md
+├── QUICK_START.md
+├── README-SEARCH-ENGINE.md
+├── README.md
+├── START_HERE.md
+├── START_LOCAL_SERVER.bat
+├── Screenshot_30-9-2025_91352_192.168.1.70.jpeg
+├── Screenshot_30-9-2025_91424_192.168.1.70.jpeg
+├── Screenshot_30-9-2025_91443_192.168.1.70.jpeg
+├── Screenshot_30-9-2025_9151_192.168.1.70.jpeg
+├── Screenshot_30-9-2025_91927_192.168.1.70.jpeg
+├── UPDATED_KARARLAR.html
+├── UPDATED_LOGIN.html
+├── UPDATE_FROM_GITHUB.bat
+├── UPDATE_LOCAL_INSTRUCTIONS.md
+├── VISUAL_STUDIO_SETUP.md
+├── ana-sayfa.html
+├── case-detail.html
+├── css
+│   ├── ana-sayfa.css
+│   ├── case-detail.css
+│   ├── components.css
+│   ├── dashboard-new.css
+│   ├── dashboard.css
+│   ├── global.css
+│   ├── login.css
+│   ├── results.css
+│   ├── search.css
+│   └── variables.css
+├── dashboard.html
+├── index.html
+├── js
+│   ├── ana-sayfa.js
+│   ├── case-detail.js
+│   ├── login.js
+│   ├── main.js
+│   ├── results.js
+│   └── search.js
+├── kararlar.html
+├── login.html
+├── mevzuatlar.html
+├── pdf-viewer.html
+├── profile.html
+├── project_structure.txt
+├── search-results.html
+├── todo-redesign.md
+└── todo.md
+
+3 directories, 56 files

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil - Hukuk Yönetim Sistemi</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/results.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <!-- Top Navigation with Search -->
+    <nav class="results-nav">
+        <div class="container-fluid">
+            <div class="results-nav-content">
+                <a href="ana-sayfa.html" class="logo-link-small">
+                    <i class="fas fa-balance-scale"></i>
+                    <span>JuriIQ</span>
+                </a>
+                
+                <div class="search-bar-compact">
+                    <form action="search-results.html" method="GET">
+                        <div class="search-input-compact">
+                            <i class="fas fa-search"></i>
+                            <input type="text" name="q" value="iş hukuku kararları 2024" placeholder="Ara...">
+                            <button type="submit" class="search-submit-btn">
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="nav-actions">
+                    <a href="ana-sayfa.html" class="icon-btn" title="Ana Sayfa">
+                        <i class="fas fa-home"></i>
+                    </a>
+                    <a href="kararlar.html" class="icon-btn" title="Kararlar">
+                        <i class="fas fa-gavel"></i>
+                    </a>
+                    <a href="mevzuatlar.html" class="icon-btn" title="Mevzuatlar">
+                        <i class="fas fa-book-open"></i>
+                    </a>
+                    <a href="bankacilik-mevzuati.html" class="icon-btn" title="Bankacılık Mevzuatı">
+                        <i class="fas fa-university"></i>
+                    </a>
+                    <button class="icon-btn" title="Bildirimler">
+                        <i class="fas fa-bell"></i>
+                    </button>
+                    <a href="dashboard.html" class="icon-btn" title="Dashboard">
+                        <i class="fas fa-th"></i>
+                    </a>
+                    <a href="profile.html" class="icon-btn" title="Profil">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <div class="user-avatar-small">AK</div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content" style="margin-left: 0; padding: var(--spacing-lg);"
+        <!-- Profile Content -->
+        <div class="row g-4">
+            <!-- Profile Card -->
+            <div class="col-12 col-lg-4">
+                <div class="card-professional" style="padding: var(--spacing-xl); text-align: center;">
+                    <div style="position: relative; display: inline-block; margin-bottom: var(--spacing-lg);">
+                        <div style="width: 150px; height: 150px; border-radius: 50%; background: linear-gradient(135deg, var(--accent-gold), var(--accent-bronze)); display: flex; align-items: center; justify-content: center; font-size: 4rem; color: white; font-weight: var(--fw-bold); box-shadow: var(--shadow-lg);">
+                            AK
+                        </div>
+                        <button class="btn-professional btn-primary" style="position: absolute; bottom: 0; right: 0; border-radius: 50%; width: 45px; height: 45px; padding: 0; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-camera"></i>
+                        </button>
+                    </div>
+                    
+                    <h2 style="margin-bottom: var(--spacing-xs);">Av. Ahmet Kaya</h2>
+                    <p style="color: var(--text-secondary); margin-bottom: var(--spacing-lg);">Yönetici</p>
+                    
+                    <div style="display: flex; gap: var(--spacing-md); justify-content: center; margin-bottom: var(--spacing-xl);">
+                        <div style="text-align: center;">
+                            <div style="font-size: var(--fs-2xl); font-weight: var(--fw-bold); color: var(--primary-navy);">247</div>
+                            <div style="font-size: var(--fs-sm); color: var(--text-secondary);">Dosya</div>
+                        </div>
+                        <div style="width: 1px; background: var(--border-color);"></div>
+                        <div style="text-align: center;">
+                            <div style="font-size: var(--fs-2xl); font-weight: var(--fw-bold); color: var(--primary-navy);">156</div>
+                            <div style="font-size: var(--fs-sm); color: var(--text-secondary);">Müşteri</div>
+                        </div>
+                        <div style="width: 1px; background: var(--border-color);"></div>
+                        <div style="text-align: center;">
+                            <div style="font-size: var(--fs-2xl); font-weight: var(--fw-bold); color: var(--primary-navy);">89</div>
+                            <div style="font-size: var(--fs-sm); color: var(--text-secondary);">Dava</div>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: left; padding: var(--spacing-lg); background: var(--bg-secondary); border-radius: var(--border-radius-md); margin-bottom: var(--spacing-lg);">
+                        <div style="display: flex; align-items: center; gap: var(--spacing-md); margin-bottom: var(--spacing-md);">
+                            <i class="fas fa-envelope" style="color: var(--accent-gold); width: 20px;"></i>
+                            <span style="font-size: var(--fs-sm);">ahmet.kaya@juriiq.com</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: var(--spacing-md); margin-bottom: var(--spacing-md);">
+                            <i class="fas fa-phone" style="color: var(--accent-gold); width: 20px;"></i>
+                            <span style="font-size: var(--fs-sm);">+90 532 123 45 67</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: var(--spacing-md);">
+                            <i class="fas fa-map-marker-alt" style="color: var(--accent-gold); width: 20px;"></i>
+                            <span style="font-size: var(--fs-sm);">İstanbul, Türkiye</span>
+                        </div>
+                    </div>
+                    
+                    <button class="btn-professional btn-outline" style="width: 100%; justify-content: center;">
+                        <i class="fas fa-edit"></i>
+                        Profili Düzenle
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Profile Form -->
+            <div class="col-12 col-lg-8">
+                <div class="card-professional" style="padding: var(--spacing-xl);">
+                    <h3 style="margin-bottom: var(--spacing-xl); padding-bottom: var(--spacing-md); border-bottom: 2px solid var(--border-color);">
+                        Kişisel Bilgiler
+                    </h3>
+                    
+                    <form>
+                        <div class="row g-4">
+                            <div class="col-12 col-md-6">
+                                <label class="form-label-professional">Ad</label>
+                                <input type="text" class="form-control-professional" value="Ahmet" placeholder="Adınız">
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <label class="form-label-professional">Soyad</label>
+                                <input type="text" class="form-control-professional" value="Kaya" placeholder="Soyadınız">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label-professional">E-posta</label>
+                                <input type="email" class="form-control-professional" value="ahmet.kaya@juriiq.com" placeholder="E-posta adresiniz">
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <label class="form-label-professional">Telefon</label>
+                                <input type="tel" class="form-control-professional" value="+90 532 123 45 67" placeholder="Telefon numaranız">
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <label class="form-label-professional">Baro Sicil No</label>
+                                <input type="text" class="form-control-professional" value="12345" placeholder="Baro sicil numaranız">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label-professional">Adres</label>
+                                <textarea class="form-control-professional" rows="3" placeholder="Adresiniz">Levent Mahallesi, Büyükdere Caddesi No: 123, Beşiktaş, İstanbul</textarea>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label-professional">Uzmanlık Alanları</label>
+                                <div style="display: flex; flex-wrap: wrap; gap: var(--spacing-sm);">
+                                    <span class="status-badge info" style="cursor: pointer;">Ticaret Hukuku</span>
+                                    <span class="status-badge info" style="cursor: pointer;">İş Hukuku</span>
+                                    <span class="status-badge info" style="cursor: pointer;">Aile Hukuku</span>
+                                    <span class="status-badge info" style="cursor: pointer;">Ceza Hukuku</span>
+                                    <button type="button" class="btn-professional btn-outline" style="padding: 4px 12px; font-size: 12px;">
+                                        <i class="fas fa-plus"></i> Ekle
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h3 style="margin-top: var(--spacing-2xl); margin-bottom: var(--spacing-xl); padding-bottom: var(--spacing-md); border-bottom: 2px solid var(--border-color);">
+                            Güvenlik
+                        </h3>
+                        
+                        <div class="row g-4">
+                            <div class="col-12 col-md-6">
+                                <label class="form-label-professional">Mevcut Şifre</label>
+                                <input type="password" class="form-control-professional" placeholder="Mevcut şifreniz">
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <label class="form-label-professional">Yeni Şifre</label>
+                                <input type="password" class="form-control-professional" placeholder="Yeni şifreniz">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label-professional">Yeni Şifre (Tekrar)</label>
+                                <input type="password" class="form-control-professional" placeholder="Yeni şifrenizi tekrar girin">
+                            </div>
+                        </div>
+                        
+                        <div style="display: flex; gap: var(--spacing-md); margin-top: var(--spacing-xl); justify-content: flex-end;">
+                            <button type="button" class="btn-professional btn-outline">
+                                <i class="fas fa-times"></i>
+                                İptal
+                            </button>
+                            <button type="submit" class="btn-professional btn-primary">
+                                <i class="fas fa-save"></i>
+                                Değişiklikleri Kaydet
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="js/main.js"></script>
+</body>
+</html>

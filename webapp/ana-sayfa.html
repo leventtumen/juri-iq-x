@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JuriIQ - Türkiye'nin Hukuk Arama Motoru</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/ana-sayfa.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body class="ana-sayfa-body">
+    <!-- Main Content - Google Style -->
+    <main class="main-content-center">
+        <div class="center-container">
+            <!-- Logo -->
+            <div class="logo-section">
+                <div class="logo-icon">
+                    <i class="fas fa-balance-scale"></i>
+                </div>
+                <h1 class="logo-title">
+                    <span class="logo-juris">Juri</span><span class="logo-iq">IQ</span>
+                </h1>
+            </div>
+
+            <!-- Search Box -->
+            <div class="search-section">
+                <form action="search-results.html" method="GET" class="search-form-main">
+                    <div class="search-box-main">
+                        <i class="fas fa-search search-icon-main"></i>
+                        <input 
+                            type="text" 
+                            name="q"
+                            class="search-input-main" 
+                            placeholder="Kararları ve mevzuatları doğal dille arayın..."
+                            autocomplete="off"
+                            autofocus
+                        >
+                        <button type="button" class="voice-btn-main" title="Sesli arama">
+                            <i class="fas fa-microphone"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Search Buttons -->
+                    <div class="search-buttons-main">
+                        <button type="submit" class="btn-search-main">
+                            <i class="fas fa-search"></i>
+                            Ara
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Quick Filters -->
+            <div class="quick-filters-main">
+                <a href="kararlar.html" class="filter-chip-main" data-filter="kararlar">
+                    <i class="fas fa-gavel"></i>
+                    Kararlar
+                </a>
+                <a href="mevzuatlar.html" class="filter-chip-main" data-filter="mevzuatlar">
+                    <i class="fas fa-book-open"></i>
+                    Mevzuatlar
+                </a>
+                <a href="bankacilik-mevzuati.html" class="filter-chip-main" data-filter="bankacilik">
+                    <i class="fas fa-university"></i>
+                    Bankacilik Mevzuati
+                </a>
+            </div>
+
+            <!-- Popular Searches -->
+            <div class="popular-section">
+                <p class="popular-title">Popüler Aramalar:</p>
+                <div class="popular-tags-main">
+                    <a href="search-results.html?q=iş+hukuku" class="popular-tag-main">İş Hukuku</a>
+                    <a href="search-results.html?q=boşanma" class="popular-tag-main">Boşanma Davaları</a>
+                    <a href="search-results.html?q=ticaret+hukuku" class="popular-tag-main">Ticaret Hukuku</a>
+                    <a href="search-results.html?q=ceza+hukuku" class="popular-tag-main">Ceza Hukuku</a>
+                    <a href="search-results.html?q=miras+hukuku" class="popular-tag-main">Miras Hukuku</a>
+                    <a href="search-results.html?q=kira+sözleşmesi" class="popular-tag-main">Kira Sözleşmeleri</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-minimal">
+        <div class="container">
+            <div class="footer-content-minimal">
+                <div class="footer-links-minimal">
+                    <a href="#">Hakkımızda</a>
+                    <a href="#">Gizlilik</a>
+                    <a href="#">Kullanım Koşulları</a>
+                    <a href="#">Yardım</a>
+                </div>
+                <div class="footer-copyright-minimal">
+                    <p>&copy; 2025 JuriIQ. Tüm hakları saklıdır.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="js/api-service.js"></script>
+    <script src="js/ana-sayfa.js"></script>
+</body>
+</html>

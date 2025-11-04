@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JuriIQ - Loading</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            background: #000000;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: #000000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Network canvas */
+        #networkCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        /* Code rain canvas */
+        #codeCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            opacity: 0.4;
+        }
+
+        /* Content */
+        .content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+        }
+
+        /* JuriIQ Text */
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: #ffffff;
+            text-shadow: 
+                0 0 30px rgba(212, 175, 55, 0.8),
+                0 0 60px rgba(212, 175, 55, 0.5);
+            margin-bottom: 20px;
+        }
+
+        .logo-accent {
+            color: #d4af37;
+            text-shadow: 
+                0 0 40px rgba(212, 175, 55, 1),
+                0 0 80px rgba(212, 175, 55, 0.6);
+        }
+
+        .letter {
+            display: inline-block;
+            opacity: 0;
+            animation: fadeIn 0.8s forwards;
+        }
+
+        .letter:nth-child(1) { animation-delay: 0.1s; }
+        .letter:nth-child(2) { animation-delay: 0.2s; }
+        .letter:nth-child(3) { animation-delay: 0.3s; }
+        .letter:nth-child(4) { animation-delay: 0.4s; }
+        .letter:nth-child(5) { animation-delay: 0.5s; }
+        .letter:nth-child(6) { animation-delay: 0.6s; }
+        .letter:nth-child(7) { animation-delay: 0.7s; }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Subtitle */
+        .subtitle {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 1.3rem;
+            color: rgba(212, 175, 55, 0.9);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeIn 1s 1.5s forwards;
+        }
+
+        /* Loading bar */
+        .loading {
+            margin-top: 50px;
+        }
+
+        .loading-bar {
+            width: 300px;
+            height: 3px;
+            background: rgba(212, 175, 55, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+            margin: 0 auto 20px;
+        }
+
+        .loading-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(212, 175, 55, 0.5), 
+                rgba(212, 175, 55, 1), 
+                rgba(212, 175, 55, 0.5), 
+                transparent);
+            width: 50%;
+            animation: loading 2s infinite;
+        }
+
+        @keyframes loading {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(300%); }
+        }
+
+        .loading-text {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.9rem;
+            color: rgba(212, 175, 55, 0.7);
+            letter-spacing: 0.2em;
+        }
+
+        /* Skip button */
+        .skip-btn {
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+            padding: 12px 24px;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 8px;
+            color: #d4af37;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 4;
+        }
+
+        .skip-btn:hover {
+            background: rgba(212, 175, 55, 0.2);
+            border-color: #d4af37;
+        }
+
+        @media (max-width: 768px) {
+            .logo { font-size: 3rem; }
+            .subtitle { font-size: 1rem; }
+            .loading-bar { width: 200px; }
+        }
+    </style>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <div class="container">
+        <canvas id="networkCanvas"></canvas>
+        <canvas id="codeCanvas"></canvas>
+        
+        <div class="content">
+            <div class="logo">
+                <span class="letter">J</span>
+                <span class="letter">u</span>
+                <span class="letter">r</span>
+                <span class="letter">i</span>
+                
+                <span class="letter logo-accent">I</span>
+                <span class="letter logo-accent">Q</span>
+            </div>
+            
+            <div class="subtitle">Yapay Zeka Destekli Hukuki Arama Platformu</div>
+            
+            <div class="loading">
+                <div class="loading-bar">
+                    <div class="loading-bar-fill"></div>
+                </div>
+                <div class="loading-text">INITIALIZING...</div>
+            </div>
+        </div>
+        
+        <button class="skip-btn" id="skipButton">Skip →</button>
+    </div>
+
+    <script>
+        // Define skip function early so it's available for the button
+        function skip() {
+            window.location.href = 'login.html';
+        }
+        
+        // Add event listener to skip button
+        document.addEventListener('DOMContentLoaded', function() {
+            const skipBtn = document.getElementById('skipButton');
+            if (skipBtn) {
+                skipBtn.addEventListener('click', skip);
+            }
+        });
+        // Network Canvas
+        const netCanvas = document.getElementById('networkCanvas');
+        const netCtx = netCanvas.getContext('2d');
+        netCanvas.width = window.innerWidth;
+        netCanvas.height = window.innerHeight;
+
+        // Code Canvas
+        const codeCanvas = document.getElementById('codeCanvas');
+        const codeCtx = codeCanvas.getContext('2d');
+        codeCanvas.width = window.innerWidth;
+        codeCanvas.height = window.innerHeight;
+
+        // Particle class
+        class Particle {
+            constructor() {
+                this.x = Math.random() * netCanvas.width;
+                this.y = Math.random() * netCanvas.height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.radius = Math.random() * 2 + 1;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                if (this.x < 0 || this.x > netCanvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > netCanvas.height) this.vy *= -1;
+            }
+
+            draw() {
+                netCtx.beginPath();
+                netCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                netCtx.fillStyle = 'rgba(212, 175, 55, 0.8)';
+                netCtx.fill();
+            }
+        }
+
+        // Create particles
+        const particles = [];
+        for (let i = 0; i < 100; i++) {
+            particles.push(new Particle());
+        }
+
+        // Draw connections
+        function drawConnections() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < 150) {
+                        netCtx.beginPath();
+                        netCtx.moveTo(particles[i].x, particles[i].y);
+                        netCtx.lineTo(particles[j].x, particles[j].y);
+                        const opacity = 1 - (dist / 150);
+                        netCtx.strokeStyle = `rgba(212, 175, 55, ${opacity * 0.3})`;
+                        netCtx.lineWidth = 1;
+                        netCtx.stroke();
+                    }
+                }
+            }
+        }
+
+        // Animate network
+        function animate() {
+            netCtx.clearRect(0, 0, netCanvas.width, netCanvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            drawConnections();
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // Code rain
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789§¶•αβγδεζηθικλμνξοπρστυφχψω';
+        const fontSize = 14;
+        const columns = codeCanvas.width / fontSize;
+        const drops = [];
+        for (let i = 0; i < columns; i++) {
+            drops[i] = Math.random() * -100;
+        }
+
+        function drawCode() {
+            codeCtx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            codeCtx.fillRect(0, 0, codeCanvas.width, codeCanvas.height);
+            codeCtx.fillStyle = 'rgba(212, 175, 55, 0.8)';
+            codeCtx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = chars[Math.floor(Math.random() * chars.length)];
+                codeCtx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > codeCanvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+        setInterval(drawCode, 50);
+
+        // Resize
+        window.addEventListener('resize', () => {
+            netCanvas.width = window.innerWidth;
+            netCanvas.height = window.innerHeight;
+            codeCanvas.width = window.innerWidth;
+            codeCanvas.height = window.innerHeight;
+        });
+
+        // Auto redirect
+        setTimeout(() => {
+            window.location.href = 'login.html';
+        }, 5000);
+
+        // Keyboard
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ' || e.key === 'Escape') {
+                skip();
+            }
+        });
+    </script>
+</body>
+</html>

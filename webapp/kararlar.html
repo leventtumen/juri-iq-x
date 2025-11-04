@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kararlar - Hukuk Yönetim Sistemi</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/components.css">
+       <link rel="stylesheet" href="css/results.css">
+    
+    <style>
+        /* Tighter table spacing */
+        .data-table td,
+        .data-table th {
+            padding: 8px 10px !important;
+            white-space: nowrap;
+        }
+        
+        /* Accordion styling for table cells */
+        .accordion-in-table {
+            border: none !important;
+            background: transparent !important;
+        }
+        
+        .accordion-in-table .accordion-item {
+            border: none !important;
+            background: transparent !important;
+        }
+        
+        .accordion-in-table .accordion-button {
+            padding: 4px 8px !important;
+            font-size: 12px !important;
+            background: transparent !important;
+            border: 1px solid var(--border-color) !important;
+            border-radius: 4px !important;
+            color: var(--text-primary) !important;
+            box-shadow: none !important;
+        }
+        
+        .accordion-in-table .accordion-button:not(.collapsed) {
+            background-color: var(--bg-secondary) !important;
+            color: var(--text-primary) !important;
+        }
+        
+        .accordion-in-table .accordion-button::after {
+            width: 12px !important;
+            height: 12px !important;
+            background-size: 12px !important;
+        }
+        
+        .accordion-in-table .accordion-body {
+            padding: 8px !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+            max-width: 300px;
+            text-align: left;
+        }
+        
+        .accordion-in-table .accordion-collapse {
+            border: none !important;
+        }
+        
+        /* Compact table cells */
+        .data-table td:nth-child(1) { max-width: 150px; }
+        .data-table td:nth-child(2) { max-width: 120px; }
+        .data-table td:nth-child(3) { max-width: 100px; }
+        .data-table td:nth-child(4) { max-width: 100px; }
+        .data-table td:nth-child(5) { max-width: 120px; }
+        .data-table td:nth-child(6) { max-width: 200px; }
+        .data-table td:nth-child(7) { max-width: 200px; }
+        .data-table td:nth-child(8) { max-width: 100px; }
+    </style>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <!-- Top Navigation with Search -->
+    <nav class="results-nav">
+        <div class="container-fluid">
+            <div class="results-nav-content">
+                <a href="ana-sayfa.html" class="logo-link-small">
+                    <i class="fas fa-balance-scale"></i>
+                    <span>JuriIQ</span>
+                </a>
+                
+                <div class="search-bar-compact">
+                    <form action="search-results.html" method="GET">
+                        <div class="search-input-compact">
+                            <i class="fas fa-search"></i>
+                            <input type="text" name="q" value="iş hukuku kararları 2024" placeholder="Ara...">
+                            <button type="submit" class="search-submit-btn">
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="nav-actions">
+                    <a href="ana-sayfa.html" class="icon-btn" title="Ana Sayfa">
+                        <i class="fas fa-home"></i>
+                    </a>
+                    <a href="kararlar.html" class="icon-btn" title="Kararlar">
+                        <i class="fas fa-gavel"></i>
+                    </a>
+                    <a href="mevzuatlar.html" class="icon-btn" title="Mevzuatlar">
+                        <i class="fas fa-book-open"></i>
+                    </a>
+                    <a href="bankacilik-mevzuati.html" class="icon-btn" title="Bankacılık Mevzuatı">
+                        <i class="fas fa-university"></i>
+                    </a>
+                    <button class="icon-btn" title="Bildirimler">
+                        <i class="fas fa-bell"></i>
+                    </button>
+                    <a href="dashboard.html" class="icon-btn" title="Dashboard">
+                        <i class="fas fa-th"></i>
+                    </a>
+                    <a href="profile.html" class="icon-btn" title="Profil">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <div class="user-avatar-small">AK</div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+
+    <!-- Main Content -->
+    <main class="main-content" style="margin-left: 0; padding: var(--spacing-lg); max-width: 100%;">
+
+        <!-- Data Table -->
+        <div class="data-table-container" style="width: 100%; max-width: 100%;">
+            <div class="data-table-header">
+                <h2 class="data-table-title">Tüm Kararlar</h2>
+                <div class="data-table-actions">
+                    <button class="btn-professional btn-outline">
+                        <i class="fas fa-filter"></i>
+                        Filtrele
+                    </button>
+                    <button class="btn-professional btn-outline">
+                        <i class="fas fa-download"></i>
+                        Dışa Aktar
+                    </button>
+                    
+                </div>
+            </div>
+            
+            <div class="data-table-wrapper">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th class="sortable">Taraflar <i class="fas fa-sort"></i></th>
+                            <th class="sortable">Yasa Madde <i class="fas fa-sort"></i></th>
+                            <th class="sortable">Tarih <i class="fas fa-sort"></i></th>
+                            <th class="sortable">Tür <i class="fas fa-sort"></i></th>
+                            <th class="sortable">Konu <i class="fas fa-sort"></i></th>
+                            <th>Özet</th>
+                            <th>Karar Metni</th>
+                            <th>İşlem</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>A.Ş. / İşçi B.Y.</strong></td>
+                            <td>İş Kanunu m.18</td>
+                            <td>15.03.2024</td>
+                            <td>Yargıtay</td>
+                            <td>İşe İade</td>
+                            <td>
+                                <div class="accordion accordion-in-table" id="accordion1">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1">
+                                                Özeti Gör
+                                            </button>
+                                        </h2>
+                                        <div id="collapse1" class="accordion-collapse collapse" data-bs-parent="#accordion1">
+                                            <div class="accordion-body">
+                                                İşçinin haksız fesih nedeniyle işe iadesi talep edilmiştir. Mahkeme, işverenin fesih gerekçesinin haklı olmadığına karar vermiştir.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="accordion accordion-in-table" id="accordionKarar1">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseKarar1">
+                                                Kararı Gör
+                                            </button>
+                                        </h2>
+                                        <div id="collapseKarar1" class="accordion-collapse collapse" data-bs-parent="#accordionKarar1">
+                                            <div class="accordion-body">
+                                                Yargıtay 9. Hukuk Dairesi'nin kararına göre, işçinin işe iadesi ve kıdem tazminatı ödenmesine hükmedilmiştir. Fesih işlemi geçersiz sayılmıştır.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <button class="btn-professional btn-outline" style="padding: 4px 8px; font-size: 12px;">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-professional btn-outline" style="padding: 4px 8px; font-size: 12px;">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>C.D. / E.F. Ltd.</strong></td>
+                            <td>TBK m.112</td>
+                            <td>22.02.2024</td>
+                            <td>Yargıtay</td>
+                            <td>Tazminat</td>
+                            <td>
+                                <div class="accordion accordion-in-table" id="accordion2">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2">
+                                                Özeti Gör
+                                            </button>
+                                        </h2>
+                                        <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#accordion2">
+                                            <div class="accordion-body">
+                                                Sözleşme ihlali nedeniyle tazminat davası açılmıştır. Davalı tarafın sözleşme şartlarına uymadığı tespit edilmiştir.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="accordion accordion-in-table" id="accordionKarar2">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseKarar2">
+                                                Kararı Gör
+                                            </button>
+                                        </h2>
+                                        <div id="collapseKarar2" class="accordion-collapse collapse" data-bs-parent="#accordionKarar2">
+                                            <div class="accordion-body">
+                                                Mahkeme, davalının sözleşme ihlali nedeniyle 50.000 TL tazminat ödemesine karar vermiştir. Karar kesinleşmiştir.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <button class="btn-professional btn-outline" style="padding: 4px 8px; font-size: 12px;">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-professional btn-outline" style="padding: 4px 8px; font-size: 12px;">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>G.H. / Belediye</strong></td>
+                            <td>İdari Yargılama m.2</td>
+                            <td>10.01.2024</td>
+                            <td>Danıştay</td>
+                            <td>İptal Davası</td>
+                            <td>
+                                <div class="accordion accordion-in-table" id="accordion3">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3">
+                                                Özeti Gör
+                                            </button>
+                                        </h2>
+                                        <div id="collapse3" class="accordion-collapse collapse" data-bs-parent="#accordion3">
+                                            <div class="accordion-body">
+                                                İdari işlemin iptali talep edilmiştir. Belediye tarafından verilen ruhsatın hukuka aykırı olduğu iddia edilmiştir.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="accordion accordion-in-table" id="accordionKarar3">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseKarar3">
+                                                Kararı Gör
+                                            </button>
+                                        </h2>
+                                        <div id="collapseKarar3" class="accordion-collapse collapse" data-bs-parent="#accordionKarar3">
+                                            <div class="accordion-body">
+                                                Danıştay, belediye tarafından verilen ruhsatın iptaline karar vermiştir. İşlem hukuka aykırı bulunmuştur.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <button class="btn-professional btn-outline" style="padding: 4px 8px; font-size: 12px;">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-professional btn-outline" style="padding: 4px 8px; font-size: 12px;">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>İ.J. / K.L.</strong></td>
+                            <td>TMK m.166</td>
+                            <td>05.12.2023</td>
+                            <td>Yargıtay</td>
+                            <td>Boşanma</td>
+                            <td>
+                                <div class="accordion accordion-in-table" id="accordion4">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4">
+                                                Özeti Gör
+                                            </button>
+                                        </h2>
+                                        <div id="collapse4" class="accordion-collapse collapse" data-bs-parent="#accordion4">
+                                            <div class="accordion-body">
+                                                Evlilik birliğinin temelinden sarsılması nedeniyle boşanma davası açılmıştır. Taraflar arasında anlaşmazlık bulunmaktadır.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="accordion accordion-in-table" id="accordionKarar4">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseKarar4">
+                                                Kararı Gör
+                                            </button>
+                                        </h2>
+                                        <div id="collapseKarar4" class="accordion-collapse collapse" data-bs-parent="#accordionKarar4">
+                                            <div class="accordion-body">
+                                                Mahkeme, evlilik birliğinin temelinden sarsıldığına kanaat getirerek boşanmaya karar vermiştir. Velayet düzenlemesi yapılmıştır.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <button class="btn-professional btn-outline" style="padding: 4px 8px; font-size: 12px;">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-professional btn-outline" style="padding: 4px 8px; font-size: 12px;">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>M.N. A.Ş. / O.P.</strong></td>
+                            <td>TTK m.549</td>
+                            <td>18.11.2023</td>
+                            <td>Yargıtay</td>
+                            <td>Ticari Uyuşmazlık</td>
+                            <td>
+                                <div class="accordion accordion-in-table" id="accordion5">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5">
+                                                Özeti Gör
+                                            </button>
+                                        </h2>
+                                        <div id="collapse5" class="accordion-collapse collapse" data-bs-parent="#accordion5">
+                                            <div class="accordion-body">
+                                                Şirket ortakları arasında kar paylaşımı konusunda uyuşmazlık çıkmıştır. Ortaklardan biri hakkını talep etmektedir.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="accordion accordion-in-table" id="accordionKarar5">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseKarar5">
+                                                Kararı Gör
+                                            </button>
+                                        </h2>
+                                        <div id="collapseKarar5" class="accordion-collapse collapse" data-bs-parent="#accordionKarar5">
+                                            <div class="accordion-body">
+                                                Yargıtay, ortağın kar payı talebinin haklı olduğuna karar vermiştir. Şirketin ödeme yapması gerektiği belirtilmiştir.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <button class="btn-professional btn-outline" style="padding: 4px 8px; font-size: 12px;">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-professional btn-outline" style="padding: 4px 8px; font-size: 12px;">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>R.S. / T.U. Bank</strong></td>
+                            <td>İİK m.68</td>
+                            <td>30.10.2023</td>
+                            <td>Yargıtay</td>
+                            <td>İcra Takibi</td>
+                            <td>
+                                <div class="accordion accordion-in-table" id="accordion6">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse6">
+                                                Özeti Gör
+                                            </button>
+                                        </h2>
+                                        <div id="collapse6" class="accordion-collapse collapse" data-bs-parent="#accordion6">
+                                            <div class="accordion-body">
+                                                Banka alacağının tahsili için icra takibi başlatılmıştır. Borçlu ödeme yapmamaktadır.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="accordion accordion-in-table" id="accordionKarar6">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseKarar6">
+                                                Kararı Gör
+                                            </button>
+                                        </h2>
+                                        <div id="collapseKarar6" class="accordion-collapse collapse" data-bs-parent="#accordionKarar6">
+                                            <div class="accordion-body">
+                                                İcra mahkemesi, bankanın alacağının tahsili için haciz işleminin devam etmesine karar vermiştir.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <button class="btn-professional btn-outline" style="padding: 4px 8px; font-size: 12px;">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-professional btn-outline" style="padding: 4px 8px; font-size: 12px;">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>V.Y. / Hazine</strong></td>
+                            <td>Anayasa m.36</td>
+                            <td>12.09.2023</td>
+                            <td>Anayasa Mahkemesi</td>
+                            <td>Bireysel Başvuru</td>
+                            <td>
+                                <div class="accordion accordion-in-table" id="accordion7">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse7">
+                                                Özeti Gör
+                                            </button>
+                                        </h2>
+                                        <div id="collapse7" class="accordion-collapse collapse" data-bs-parent="#accordion7">
+                                            <div class="accordion-body">
+                                                Adil yargılanma hakkının ihlali iddiasıyla bireysel başvuru yapılmıştır. Başvurucu haklarının korunmadığını savunmaktadır.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="accordion accordion-in-table" id="accordionKarar7">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseKarar7">
+                                                Kararı Gör
+                                            </button>
+                                        </h2>
+                                        <div id="collapseKarar7" class="accordion-collapse collapse" data-bs-parent="#accordionKarar7">
+                                            <div class="accordion-body">
+                                                Anayasa Mahkemesi, adil yargılanma hakkının ihlal edildiğine karar vermiştir. Tazminat ödenmesine hükmedilmiştir.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <button class="btn-professional btn-outline" style="padding: 4px 8px; font-size: 12px;">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-professional btn-outline" style="padding: 4px 8px; font-size: 12px;">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Z.A. / B.C. Ltd.</strong></td>
+                            <td>Tüketici Kanunu m.4</td>
+                            <td>25.08.2023</td>
+                            <td>Yargıtay</td>
+                            <td>Tüketici Hukuku</td>
+                            <td>
+                                <div class="accordion accordion-in-table" id="accordion8">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse8">
+                                                Özeti Gör
+                                            </button>
+                                        </h2>
+                                        <div id="collapse8" class="accordion-collapse collapse" data-bs-parent="#accordion8">
+                                            <div class="accordion-body">
+                                                Ayıplı mal nedeniyle tüketici haklarının korunması davası açılmıştır. Ürün garantisi kapsamında değişim talep edilmektedir.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="accordion accordion-in-table" id="accordionKarar8">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseKarar8">
+                                                Kararı Gör
+                                            </button>
+                                        </h2>
+                                        <div id="collapseKarar8" class="accordion-collapse collapse" data-bs-parent="#accordionKarar8">
+                                            <div class="accordion-body">
+                                                Mahkeme, tüketicinin haklı olduğuna karar vermiştir. Satıcının ayıplı malı değiştirmesi veya bedel iadesinde bulunması gerektiği belirtilmiştir.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <button class="btn-professional btn-outline" style="padding: 4px 8px; font-size: 12px;">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-professional btn-outline" style="padding: 4px 8px; font-size: 12px;">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>D.E. / F.G. A.Ş.</strong></td>
+                            <td>KVKK m.12</td>
+                            <td>07.07.2023</td>
+                            <td>Yargıtay</td>
+                            <td>Kişisel Veri</td>
+                            <td>
+                                <div class="accordion accordion-in-table" id="accordion9">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse9">
+                                                Özeti Gör
+                                            </button>
+                                        </h2>
+                                        <div id="collapse9" class="accordion-collapse collapse" data-bs-parent="#accordion9">
+                                            <div class="accordion-body">
+                                                Kişisel verilerin hukuka aykırı işlenmesi nedeniyle tazminat talebi yapılmıştır. Şirket izinsiz veri kullanmıştır.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="accordion accordion-in-table" id="accordionKarar9">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseKarar9">
+                                                Kararı Gör
+                                            </button>
+                                        </h2>
+                                        <div id="collapseKarar9" class="accordion-collapse collapse" data-bs-parent="#accordionKarar9">
+                                            <div class="accordion-body">
+                                                Mahkeme, şirketin KVKK'ya aykırı davrandığına karar vermiştir. Manevi tazminat ödenmesine hükmedilmiştir.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <button class="btn-professional btn-outline" style="padding: 4px 8px; font-size: 12px;">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-professional btn-outline" style="padding: 4px 8px; font-size: 12px;">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>H.İ. / J.K.</strong></td>
+                            <td>TMK m.652</td>
+                            <td>19.06.2023</td>
+                            <td>Yargıtay</td>
+                            <td>Miras Hukuku</td>
+                            <td>
+                                <div class="accordion accordion-in-table" id="accordion10">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse10">
+                                                Özeti Gör
+                                            </button>
+                                        </h2>
+                                        <div id="collapse10" class="accordion-collapse collapse" data-bs-parent="#accordion10">
+                                            <div class="accordion-body">
+                                                Miras paylaşımı ve tenkis davası açılmıştır. Mirasçılar arasında anlaşmazlık bulunmaktadır.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="accordion accordion-in-table" id="accordionKarar10">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseKarar10">
+                                                Kararı Gör
+                                            </button>
+                                        </h2>
+                                        <div id="collapseKarar10" class="accordion-collapse collapse" data-bs-parent="#accordionKarar10">
+                                            <div class="accordion-body">
+                                                Mahkeme, saklı payın ihlal edildiğine karar vermiştir. Tenkis davası kabul edilmiş ve miras yeniden paylaştırılmıştır.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <button class="btn-professional btn-outline" style="padding: 4px 8px; font-size: 12px;">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-professional btn-outline" style="padding: 4px 8px; font-size: 12px;">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="data-table-footer">
+                <div style="font-size: var(--fs-sm); color: var(--text-secondary);">
+                    Toplam 52 kayıttan 1-10 arası gösteriliyor
+                </div>
+                <ul class="pagination">
+                    <li class="pagination-item">
+                        <i class="fas fa-chevron-left"></i>
+                    </li>
+                    <li class="pagination-item active">1</li>
+                    <li class="pagination-item">2</li>
+                    <li class="pagination-item">3</li>
+                    <li class="pagination-item">4</li>
+                    <li class="pagination-item">5</li>
+                    <li class="pagination-item">
+                        <i class="fas fa-chevron-right"></i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="js/main.js"></script>
+    <script src="js/kararlar.js"></script>
+</body>
+</html>

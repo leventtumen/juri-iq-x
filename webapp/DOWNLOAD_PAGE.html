@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JuriIQ - Download Updated Files</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px;
+        }
+        
+        h1 {
+            color: #2d3748;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .subtitle {
+            color: #718096;
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+        }
+        
+        .method {
+            background: #f7fafc;
+            border-left: 4px solid #667eea;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+        }
+        
+        .method h2 {
+            color: #2d3748;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .method h2::before {
+            content: "🚀";
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+        
+        .method.recommended {
+            border-left-color: #48bb78;
+            background: #f0fff4;
+        }
+        
+        .method.recommended h2::before {
+            content: "⭐";
+        }
+        
+        .method p {
+            color: #4a5568;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin: 5px;
+        }
+        
+        .download-btn:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        
+        .download-btn.primary {
+            background: #48bb78;
+        }
+        
+        .download-btn.primary:hover {
+            background: #38a169;
+        }
+        
+        .file-list {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        
+        .file-item {
+            padding: 10px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .file-item:last-child {
+            border-bottom: none;
+        }
+        
+        .file-name {
+            color: #2d3748;
+            font-weight: 500;
+        }
+        
+        .alert {
+            background: #fff5f5;
+            border-left: 4px solid #f56565;
+            padding: 15px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+        }
+        
+        .alert h3 {
+            color: #c53030;
+            margin-bottom: 8px;
+        }
+        
+        .alert p {
+            color: #742a2a;
+            margin: 0;
+        }
+        
+        .success {
+            background: #f0fff4;
+            border-left-color: #48bb78;
+        }
+        
+        .success h3 {
+            color: #2f855a;
+        }
+        
+        .success p {
+            color: #22543d;
+        }
+        
+        .checklist {
+            background: #edf2f7;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        
+        .checklist h3 {
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+        
+        .checklist ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .checklist li {
+            padding: 8px 0;
+            color: #4a5568;
+        }
+        
+        .checklist li::before {
+            content: "✓";
+            color: #48bb78;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+            color: #718096;
+        }
+    </style>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>📥 JuriIQ Frontend Updates</h1>
+        <p class="subtitle">Download the updated files for your local project</p>
+        
+        <div class="alert success">
+            <h3>✅ Updates Ready!</h3>
+            <p>All changes have been committed and are ready for download. Choose your preferred method below.</p>
+        </div>
+        
+        <!-- Method 1: Direct Download -->
+        <div class="method recommended">
+            <h2>Method 1: Direct File Download (EASIEST)</h2>
+            <p>Download the updated files directly and replace them in your local folder.</p>
+            <a href="https://raw.githubusercontent.com/huseyinarabaji-stack/juris-frontend/feature/ui-improvements/login.html" class="download-btn primary" download>Download login.html</a>
+            <a href="https://raw.githubusercontent.com/huseyinarabaji-stack/juris-frontend/feature/ui-improvements/kararlar.html" class="download-btn primary" download>Download kararlar.html</a>
+        </div>
+        
+        <!-- Method 2: Download ZIP -->
+        <div class="method">
+            <h2>Method 2: Download Entire Branch as ZIP</h2>
+            <p>Download all files including helper scripts and documentation.</p>
+            <a href="https://github.com/huseyinarabaji-stack/juris-frontend/archive/refs/heads/feature/ui-improvements.zip" class="download-btn">Download ZIP File</a>
+        </div>
+        
+        <!-- Method 3: View on GitHub -->
+        <div class="method">
+            <h2>Method 3: View Changes on GitHub</h2>
+            <p>Review all changes in the pull request before downloading.</p>
+            <a href="https://github.com/huseyinarabaji-stack/juris-frontend/pull/2" class="download-btn" target="_blank">View Pull Request</a>
+            <a href="https://github.com/huseyinarabaji-stack/juris-frontend/pull/2/files" class="download-btn" target="_blank">View Changed Files</a>
+        </div>
+        
+        <!-- Method 4: Helper Scripts -->
+        <div class="method">
+            <h2>Method 4: Automated Update Scripts</h2>
+            <p>Download batch scripts to automatically update your local repository.</p>
+            <a href="https://raw.githubusercontent.com/huseyinarabaji-stack/juris-frontend/feature/ui-improvements/UPDATE_FROM_GITHUB.bat" class="download-btn" download>Download UPDATE_FROM_GITHUB.bat</a>
+            <a href="https://raw.githubusercontent.com/huseyinarabaji-stack/juris-frontend/feature/ui-improvements/EMERGENCY_UPDATE.bat" class="download-btn" download>Download EMERGENCY_UPDATE.bat</a>
+        </div>
+        
+        <!-- Documentation -->
+        <div class="method">
+            <h2>Method 5: Download Documentation</h2>
+            <p>Get detailed guides for Git Bash, VS Code, and troubleshooting.</p>
+            <div class="file-list">
+                <div class="file-item">
+                    <span class="file-name">📄 DOWNLOAD_INSTRUCTIONS.md</span>
+                    <a href="https://raw.githubusercontent.com/huseyinarabaji-stack/juris-frontend/feature/ui-improvements/DOWNLOAD_INSTRUCTIONS.md" class="download-btn" download>Download</a>
+                </div>
+                <div class="file-item">
+                    <span class="file-name">📄 GIT_BASH_COMMANDS.txt</span>
+                    <a href="https://raw.githubusercontent.com/huseyinarabaji-stack/juris-frontend/feature/ui-improvements/GIT_BASH_COMMANDS.txt" class="download-btn" download>Download</a>
+                </div>
+                <div class="file-item">
+                    <span class="file-name">📄 VISUAL_STUDIO_SETUP.md</span>
+                    <a href="https://raw.githubusercontent.com/huseyinarabaji-stack/juris-frontend/feature/ui-improvements/VISUAL_STUDIO_SETUP.md" class="download-btn" download>Download</a>
+                </div>
+                <div class="file-item">
+                    <span class="file-name">📄 DOWNLOAD_AND_UPDATE_GUIDE.md</span>
+                    <a href="https://raw.githubusercontent.com/huseyinarabaji-stack/juris-frontend/feature/ui-improvements/DOWNLOAD_AND_UPDATE_GUIDE.md" class="download-btn" download>Download</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Verification Checklist -->
+        <div class="checklist">
+            <h3>✅ Verify Your Updates</h3>
+            <p style="margin-bottom: 15px; color: #4a5568;">After updating, check these changes:</p>
+            <ul>
+                <li><strong>login.html:</strong> Should say "Yapay Zeka Destekli Hukuki Arama Platformu"</li>
+                <li><strong>login.html:</strong> Should NOT have "Kapsamlı Dosya Yönetimi"</li>
+                <li><strong>kararlar.html:</strong> Table headers should be "Taraflar, Yasa Madde, Tarih, Tür, Konu, Özet"</li>
+                <li><strong>kararlar.html:</strong> Should have Turkish legal case examples</li>
+            </ul>
+        </div>
+        
+        <!-- Git Commands -->
+        <div class="alert">
+            <h3>💻 For Git Users</h3>
+            <p>If you prefer using Git commands, open Git Bash in your project folder and run:</p>
+            <pre style="background: #2d3748; color: #fff; padding: 15px; border-radius: 5px; margin-top: 10px; overflow-x: auto;">git fetch origin
+git checkout feature/ui-improvements
+git pull origin feature/ui-improvements</pre>
+        </div>
+        
+        <div class="footer">
+            <p><strong>JuriIQ Frontend</strong> - AI-Powered Legal Search Platform</p>
+            <p style="margin-top: 10px;">Need help? Check the documentation files or contact support.</p>
+        </div>
+    </div>
+</body>
+</html>

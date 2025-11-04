@@ -1,0 +1,95 @@
+# Git Bash Commands to Update Your Local Repository
+
+## IMPORTANT: Run these commands in Git Bash in your project folder
+
+## Step 1: Navigate to your project folder
+cd C:/path/to/your/juris-frontend
+# Replace "path/to/your" with your actual path
+
+## Step 2: Check your current status
+git status
+git branch
+
+## Step 3: Make sure you're on the main branch
+git checkout main
+
+## Step 4: Fetch all changes from GitHub
+git fetch origin
+
+## Step 5: Pull the changes
+git pull origin main
+
+## If Step 5 fails with "Your local changes would be overwritten":
+git stash
+git pull origin main
+git stash pop
+
+## If you want to get the feature branch with all updates:
+git checkout feature/ui-improvements
+git pull origin feature/ui-improvements
+
+## To merge the feature branch into main locally:
+git checkout main
+git merge feature/ui-improvements
+
+## If everything fails, do a hard reset (WARNING: This will discard local changes):
+git fetch origin
+git reset --hard origin/main
+
+## To verify the changes were applied:
+git log --oneline -5
+
+## Check which files changed:
+git diff HEAD~1
+
+---
+
+## Alternative: Fresh Clone Method
+
+## Step 1: Backup your current folder
+# Manually copy C:\juris-frontend to C:\juris-frontend-backup
+
+## Step 2: Navigate to parent directory
+cd C:/
+
+## Step 3: Remove old folder (after backing up!)
+rm -rf juris-frontend
+
+## Step 4: Clone fresh copy
+git clone https://github.com/huseyinarabaji-stack/juris-frontend.git
+
+## Step 5: Navigate into the folder
+cd juris-frontend
+
+## Step 6: Checkout the feature branch to see changes
+git checkout feature/ui-improvements
+
+---
+
+## Troubleshooting Commands
+
+## Check your Git configuration:
+git config --list
+
+## Check remote repository URL:
+git remote -v
+
+## Re-authenticate with GitHub:
+gh auth login
+
+## Check GitHub CLI status:
+gh auth status
+
+## Fix remote URL if needed:
+git remote set-url origin https://github.com/huseyinarabaji-stack/juris-frontend.git
+
+---
+
+## After Successfully Pulling:
+
+## Verify the changes:
+# 1. Open login.html in browser - should say "Yapay Zeka Destekli Hukuki Arama Platformu"
+# 2. Open kararlar.html in browser - should have "Taraflar, Yasa Madde, Tarih, Tür, Konu, Özet" columns
+
+## View what changed:
+git log --oneline --graph --all -10
