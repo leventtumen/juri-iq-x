@@ -8,6 +8,7 @@ The Juri-IQ Backend System is a secure, scalable Flask-based API that provides d
 
 ### Technology Stack
 - **Backend Framework**: Flask 2.3.3
+- **Frontend**: Static HTML/CSS/JavaScript (served by Python HTTP server)
 - **Database**: SQLAlchemy with SQLite (development) / PostgreSQL (production)
 - **Authentication**: JWT (JSON Web Tokens)
 - **AI/NLP**: spaCy, NLTK, scikit-learn
@@ -46,8 +47,7 @@ backend/
 ## Installation & Setup
 
 ### Prerequisites
-- Python 3.8 or higher
-- Node.js 16 or higher (for frontend)
+- Python 3.8 or higher (required for both backend and frontend serving)
 - pip (Python package manager)
 
 ### Windows Installation
@@ -66,10 +66,12 @@ backend/
    This script will:
    - Create the project directory at `C:\projects\project-juri-iq`
    - Set up Python virtual environment
-   - Install all dependencies
+   - Install all backend dependencies
    - Download required NLP models
    - Initialize the database
-   - Start both backend (port 5000) and frontend (port 8000) services
+   - Start backend server (port 5000) and static frontend server (port 8000)
+
+**Note**: The frontend is static HTML/CSS/JavaScript and uses Python's built-in HTTP server for serving.
 
 ### Manual Installation
 

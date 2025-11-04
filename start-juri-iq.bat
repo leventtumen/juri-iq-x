@@ -9,23 +9,16 @@ set PROJECT_PATH=C:\projects\project-juri-iq
 set BACKEND_PORT=5000
 set FRONTEND_PORT=8000
 
-REM Check if Python is installed
+REM Check if Python is installed (required for both backend and frontend)
 python --version >nul 2>&1
 if errorlevel 1 (
     echo ERROR: Python is not installed or not in PATH
-    echo Please install Python 3.8 or higher
+    echo Please install Python 3.8 or higher (required for both backend and frontend)
     pause
     exit /b 1
 )
 
-REM Check if Node.js is installed
-node --version >nul 2>&1
-if errorlevel 1 (
-    echo ERROR: Node.js is not installed or not in PATH
-    echo Please install Node.js 16 or higher
-    pause
-    exit /b 1
-)
+REM Note: Frontend is static HTML/CSS/JavaScript, no Node.js required
 
 echo Creating project directories...
 if not exist "%PROJECT_PATH%" (
@@ -43,6 +36,7 @@ echo.
 echo ========================================
 echo Setting up Backend Environment
 echo ========================================
+echo Note: Frontend is static HTML/CSS/JavaScript - no Node.js required
 
 REM Create virtual environment if it doesn't exist
 if not exist "backend\venv" (
@@ -73,12 +67,8 @@ echo ========================================
 echo Setting up Frontend Environment
 echo ========================================
 
-REM Check if http-server is installed (for simple frontend serving)
-where http-server >nul 2>&1
-if errorlevel 1 (
-    echo Installing http-server for frontend...
-    npm install -g http-server
-)
+REM Use Python's built-in HTTP server for static frontend
+echo Python HTTP server will be used for frontend
 
 REM Initialize document processing on first run
 echo Initializing database and processing documents...
@@ -100,7 +90,7 @@ timeout /t 3 /nobreak >nul
 
 REM Start frontend server in background
 echo Starting frontend server on port %FRONTEND_PORT%...
-start "Frontend Server" cmd /k "cd /d %PROJECT_PATH%\webapp && http-server -p %FRONTEND_PORT% -c-1 --cors"
+start "Frontend Server" cmd /k "cd /d %PROJECT_PATH%\webapp && python -m http.server %FRONTEND_PORT%"
 
 echo.
 echo ========================================
