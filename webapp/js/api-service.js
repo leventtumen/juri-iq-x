@@ -1,277 +1,350 @@
-// ============================================
-// API SERVICE - Centralized API Communication
-// ============================================
-
-/**
- * API Service for JurisIQ Application
- * Handles all communication with the backend API
- */
-
 class ApiService {
     constructor() {
-        // API Base URL - uses relative path since nginx proxies /api to backend
-        this.baseURL = '/api';
-        
-        // Auth token management
-        this.tokenKey = 'authToken';
+        this.baseUrl = 'http://localhost:5000/api';
+        this.token = localStorage.getItem('juris_iq_token');
     }
 
-    /**
-     * Get authentication token from localStorage
-     */
-    getToken() {
-        return localStorage.getItem(this.tokenKey);
-    }
-
-    /**
-     * Set authentication token in localStorage
-     */
+    // Utility methods
     setToken(token) {
-        localStorage.setItem(this.tokenKey, token);
+        this.token = token;
+        localStorage.setItem('juris_iq_token', token);
     }
 
-    /**
-     * Remove authentication token from localStorage
-     */
     removeToken() {
-        localStorage.removeItem(this.tokenKey);
+        this.token = null;
+        localStorage.removeItem('juris_iq_token');
     }
 
-    /**
-     * Check if user is authenticated
-     */
-    isAuthenticated() {
-        return !!this.getToken();
-    }
-
-    /**
-     * Get default headers for API requests
-     */
-    getHeaders(includeAuth = true) {
-        const headers = {
-            'Content-Type': 'application/json'
+    async request(endpoint, options = {}) {
+        const url = `${this.baseUrl}${endpoint}`;
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                ...options.headers
+            },
+            ...options
         };
 
-        if (includeAuth) {
-            const token = this.getToken();
-            if (token) {
-                headers['Authorization'] = `Bearer ${token}`;
-            }
+        if (this.token) {
+            config.headers['Authorization'] = `Bearer ${this.token}`;
         }
 
-        return headers;
-    }
-
-    /**
-     * Make API request with error handling
-     */
-    async request(endpoint, options = {}) {
-        const url = `${this.baseURL}${endpoint}`;
-        
         try {
-            const response = await fetch(url, {
-                ...options,
-                headers: {
-                    ...this.getHeaders(options.includeAuth !== false),
-                    ...options.headers
-                }
-            });
-
-            // Handle 401 Unauthorized - redirect to login
-            if (response.status === 401) {
-                this.removeToken();
-                window.location.href = 'login.html';
-                throw new Error('Unauthorized - Please login again');
-            }
-
-            // Parse response
+            const response = await fetch(url, config);
             const data = await response.json();
 
-            // Handle non-OK responses
+            // Handle token expiration
+            if (data.redirect_to_login) {
+                this.removeToken();
+                window.location.href = 'login.html';
+                return null;
+            }
+
             if (!response.ok) {
-                throw new Error(data.message || `API Error: ${response.status}`);
+                throw new Error(data.message || `HTTP error! status: ${response.status}`);
             }
 
             return data;
         } catch (error) {
-            console.error('API Request Error:', error);
+            console.error('API request failed:', error);
             throw error;
         }
     }
 
-    /**
-     * GET request
-     */
-    async get(endpoint, params = {}) {
-        const queryString = new URLSearchParams(params).toString();
-        const url = queryString ? `${endpoint}?${queryString}` : endpoint;
-        
-        return this.request(url, {
-            method: 'GET'
-        });
-    }
-
-    /**
-     * POST request
-     */
-    async post(endpoint, data = {}, includeAuth = true) {
-        return this.request(endpoint, {
+    // Authentication endpoints
+    async login(email, password) {
+        const data = await this.request('/auth/login', {
             method: 'POST',
-            body: JSON.stringify(data),
-            includeAuth
+            body: JSON.stringify({ email, password })
+        });
+        
+        if (data && data.access_token) {
+            this.setToken(data.access_token);
+            return data.user;
+        }
+        return null;
+    }
+
+    async register(email, password, subscriptionType = 'simple') {
+        const data = await this.request('/auth/register', {
+            method: 'POST',
+            body: JSON.stringify({ 
+                email, 
+                password, 
+                subscription_type: subscriptionType 
+            })
+        });
+        
+        if (data && data.access_token) {
+            this.setToken(data.access_token);
+            return data.user;
+        }
+        return null;
+    }
+
+    async logout() {
+        try {
+            await this.request('/auth/logout', {
+                method: 'POST'
+            });
+        } catch (error) {
+            console.error('Logout error:', error);
+        } finally {
+            this.removeToken();
+        }
+    }
+
+    async getCurrentUser() {
+        return await this.request('/auth/me');
+    }
+
+    async refreshToken() {
+        const data = await this.request('/auth/refresh', {
+            method: 'POST'
+        });
+        
+        if (data && data.access_token) {
+            this.setToken(data.access_token);
+            return data.user;
+        }
+        return null;
+    }
+
+    // Document endpoints
+    async getDocuments(page = 1, perPage = 20, fileType = null, processed = null) {
+        let endpoint = `/documents/?page=${page}&per_page=${perPage}`;
+        
+        if (fileType) {
+            endpoint += `&file_type=${fileType}`;
+        }
+        
+        if (processed !== null) {
+            endpoint += `&processed=${processed}`;
+        }
+        
+        return await this.request(endpoint);
+    }
+
+    async getDocument(documentId) {
+        return await this.request(`/documents/${documentId}`);
+    }
+
+    async searchDocuments(query, page = 1, perPage = 20, similarityThreshold = 0.1) {
+        return await this.request('/search/query', {
+            method: 'POST',
+            body: JSON.stringify({
+                query,
+                page,
+                per_page: perPage,
+                similarity_threshold: similarityThreshold
+            })
         });
     }
 
-    /**
-     * PUT request
-     */
-    async put(endpoint, data = {}) {
-        return this.request(endpoint, {
+    async getDocumentStats() {
+        return await this.request('/documents/stats');
+    }
+
+    async getDocumentTypes() {
+        return await this.request('/documents/types');
+    }
+
+    async getSimilarDocuments(documentId, threshold = 0.2, limit = 10) {
+        let endpoint = `/search/similar/${documentId}?threshold=${threshold}&limit=${limit}`;
+        return await this.request(endpoint);
+    }
+
+    async getSearchSuggestions(query) {
+        return await this.request(`/search/suggestions?q=${encodeURIComponent(query)}`);
+    }
+
+    // Search endpoints
+    async getSearchHistory() {
+        return await this.request('/search/history');
+    }
+
+    // Bookmark endpoints
+    async createBookmark(documentId, notes = '') {
+        return await this.request('/bookmarks/', {
+            method: 'POST',
+            body: JSON.stringify({
+                document_id: documentId,
+                notes
+            })
+        });
+    }
+
+    async getBookmarks(page = 1, perPage = 20) {
+        return await this.request(`/bookmarks/?page=${page}&per_page=${perPage}`);
+    }
+
+    async getBookmark(bookmarkId) {
+        return await this.request(`/bookmarks/${bookmarkId}`);
+    }
+
+    async updateBookmark(bookmarkId, notes) {
+        return await this.request(`/bookmarks/${bookmarkId}`, {
             method: 'PUT',
-            body: JSON.stringify(data)
+            body: JSON.stringify({ notes })
         });
     }
 
-    /**
-     * DELETE request
-     */
-    async delete(endpoint) {
-        return this.request(endpoint, {
+    async deleteBookmark(bookmarkId) {
+        return await this.request(`/bookmarks/${bookmarkId}`, {
             method: 'DELETE'
         });
     }
 
-    // ============================================
-    // AUTH ENDPOINTS
-    // ============================================
+    async getBookmarkByDocument(documentId) {
+        return await this.request(`/bookmarks/document/${documentId}`);
+    }
 
-    /**
-     * User login
-     */
-    async login(email, password, deviceId, deviceName = 'Web Browser', deviceType = 'Web') {
-        const data = await this.post('/auth/login', {
-            email,
-            password,
-            deviceId,
-            deviceName,
-            deviceType
-        }, false);
+    async getBookmarkStats() {
+        return await this.request('/bookmarks/stats');
+    }
 
-        if (data.token) {
-            this.setToken(data.token);
+    // Profile endpoints
+    async getProfile() {
+        return await this.request('/profile/');
+    }
+
+    async getSubscription() {
+        return await this.request('/profile/subscription');
+    }
+
+    async updateSubscription(subscriptionType) {
+        return await this.request('/profile/subscription', {
+            method: 'PUT',
+            body: JSON.stringify({
+                subscription_type: subscriptionType
+            })
+        });
+    }
+
+    async getDevices() {
+        return await this.request('/profile/devices');
+    }
+
+    async removeDevice(deviceId) {
+        return await this.request(`/profile/devices/${deviceId}`, {
+            method: 'DELETE'
+        });
+    }
+
+    async updateDeviceName(deviceId, deviceName) {
+        return await this.request(`/profile/devices/${deviceId}`, {
+            method: 'PUT',
+            body: JSON.stringify({
+                device_name: deviceName
+            })
+        });
+    }
+
+    async getActivity(activityType = 'all', limit = 20) {
+        return await this.request(`/profile/activity?type=${activityType}&limit=${limit}`);
+    }
+
+    async getProfileStats() {
+        return await this.request('/profile/stats');
+    }
+
+    // Admin endpoints
+    async getDashboard() {
+        return await this.request('/admin/dashboard');
+    }
+
+    async getUsers(page = 1, perPage = 20, filters = {}) {
+        let endpoint = `/admin/users?page=${page}&per_page=${perPage}`;
+        
+        if (filters.is_active !== undefined) {
+            endpoint += `&is_active=${filters.is_active}`;
         }
-
-        return data;
+        
+        if (filters.is_admin !== undefined) {
+            endpoint += `&is_admin=${filters.is_admin}`;
+        }
+        
+        if (filters.is_blacklisted !== undefined) {
+            endpoint += `&is_blacklisted=${filters.is_blacklisted}`;
+        }
+        
+        if (filters.subscription_type) {
+            endpoint += `&subscription_type=${filters.subscription_type}`;
+        }
+        
+        return await this.request(endpoint);
     }
 
-    /**
-     * User registration
-     */
-    async register(email, password, firstName, lastName) {
-        return this.post('/auth/register', {
-            email,
-            password,
-            firstName,
-            lastName
-        }, false);
+    async getUserDetails(userId) {
+        return await this.request(`/admin/users/${userId}`);
     }
 
-    /**
-     * Logout user
-     */
-    logout() {
-        this.removeToken();
-        window.location.href = 'login.html';
+    async toggleUserStatus(userId, action) {
+        return await this.request(`/admin/users/${userId}/toggle-status`, {
+            method: 'POST',
+            body: JSON.stringify({ action })
+        });
     }
 
-    // ============================================
-    // DOCUMENT ENDPOINTS
-    // ============================================
-
-    /**
-     * Search documents
-     */
-    async searchDocuments(query, filters = {}) {
-        const params = {
-            query,
-            page: filters.page || 1,
-            pageSize: filters.pageSize || 20
-        };
-
-        // Add optional filters
-        if (filters.documentType) params.documentType = filters.documentType;
-        if (filters.courtName) params.courtName = filters.courtName;
-        if (filters.dateFrom) params.dateFrom = filters.dateFrom;
-        if (filters.dateTo) params.dateTo = filters.dateTo;
-
-        return this.get('/documents/search', params);
+    async updateUserSubscription(userId, subscriptionType, isActive = true) {
+        return await this.request(`/admin/users/${userId}/subscription`, {
+            method: 'PUT',
+            body: JSON.stringify({
+                subscription_type: subscriptionType,
+                is_active: isActive
+            })
+        });
     }
 
-    /**
-     * Get document by ID
-     */
-    async getDocument(id) {
-        return this.get(`/documents/${id}`);
+    async getUserDevices(userId) {
+        return await this.request(`/admin/users/${userId}/devices`);
     }
 
-    /**
-     * Get document statistics (views, bookmarks)
-     */
-    async getDocumentStatistics(id) {
-        return this.get(`/documents/${id}/statistics`);
+    async revokeUserDevice(userId, deviceId) {
+        return await this.request(`/admin/users/${userId}/devices/${deviceId}/revoke`, {
+            method: 'POST'
+        });
     }
 
-    /**
-     * Generate AI summary for document
-     */
-    async generateDocumentSummary(id) {
-        return this.post(`/documents/${id}/generate-summary`, {});
+    async triggerDocumentProcessing() {
+        return await this.request('/admin/system/process-documents', {
+            method: 'POST'
+        });
     }
 
-    /**
-     * Get related documents
-     */
-    async getRelatedDocuments(id, limit = 5) {
-        return this.get(`/documents/${id}/related?limit=${limit}`);
+    async getSystemStats() {
+        return await this.request('/admin/system/stats');
     }
 
-    /**
-     * Bookmark a document
-     */
-    async bookmarkDocument(id, notes = '') {
-        return this.post(`/documents/${id}/bookmark`, { notes });
+    // Utility method to check if user is authenticated
+    isAuthenticated() {
+        return !!this.token;
     }
 
-    /**
-     * Remove bookmark from document
-     */
-    async removeBookmark(id) {
-        return this.delete(`/documents/${id}/bookmark`);
-    }
-
-    /**
-     * Get user's bookmarks
-     */
-    async getBookmarks() {
-        return this.get('/documents/bookmarks');
-    }
-
-    // ============================================
-    // HEALTH CHECK
-    // ============================================
-
-    /**
-     * Check API health
-     */
-    async healthCheck() {
-        return this.get('/health');
+    // Utility method to handle API errors
+    handleError(error, defaultMessage = 'An error occurred') {
+        console.error('API Error:', error);
+        const message = error.message || defaultMessage;
+        
+        // Show error message to user (you might want to integrate with a toast/notification system)
+        if (typeof window !== 'undefined' && window.alert) {
+            alert(message);
+        }
+        
+        return message;
     }
 }
 
-// Create singleton instance
+// Create global instance
 const apiService = new ApiService();
 
 // Export for use in other modules
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = apiService;
+    module.exports = ApiService;
+}
+
+// Make available globally for browser usage
+if (typeof window !== 'undefined') {
+    window.apiService = apiService;
+    window.ApiService = ApiService;
 }
