@@ -1,0 +1,16 @@
+using System;
+
+namespace JuriIQ.Core.Models
+{
+    public class UserDevice
+    {
+        public Guid Id { get; set; }
+        public Guid UserId { get; set; }
+        public string DeviceId { get; set; } = string.Empty;
+        public string? DeviceName { get; set; }
+        public string? DeviceType { get; set; }
+        public DateTime LastLogin { get; set; } = DateTime.UtcNow;
+        public bool IsActive { get; set; } = true;
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    }
+}

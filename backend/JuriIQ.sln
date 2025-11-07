@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JuriIQ.API", "JuriIQ.API\JuriIQ.API.csproj", "{91827597-4225-48BE-8FCD-B95E47CBE6F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JuriIQ.Core", "JuriIQ.Core\JuriIQ.Core.csproj", "{0A80A0EE-A6D1-4C80-938F-504DB57351EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JuriIQ.Infrastructure", "JuriIQ.Infrastructure\JuriIQ.Infrastructure.csproj", "{F9C0CDB0-D30B-4B22-B33C-15957F875955}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JuriIQ.AI", "JuriIQ.AI\JuriIQ.AI.csproj", "{8AACC6DD-86F9-4739-A998-EE508D0755E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JuriIQ.Scheduler", "JuriIQ.Scheduler\JuriIQ.Scheduler.csproj", "{BC97D253-478E-4DB4-81EB-D3D796E9CB68}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{91827597-4225-48BE-8FCD-B95E47CBE6F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91827597-4225-48BE-8FCD-B95E47CBE6F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91827597-4225-48BE-8FCD-B95E47CBE6F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91827597-4225-48BE-8FCD-B95E47CBE6F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A80A0EE-A6D1-4C80-938F-504DB57351EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A80A0EE-A6D1-4C80-938F-504DB57351EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A80A0EE-A6D1-4C80-938F-504DB57351EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A80A0EE-A6D1-4C80-938F-504DB57351EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9C0CDB0-D30B-4B22-B33C-15957F875955}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9C0CDB0-D30B-4B22-B33C-15957F875955}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9C0CDB0-D30B-4B22-B33C-15957F875955}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9C0CDB0-D30B-4B22-B33C-15957F875955}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AACC6DD-86F9-4739-A998-EE508D0755E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AACC6DD-86F9-4739-A998-EE508D0755E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AACC6DD-86F9-4739-A998-EE508D0755E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AACC6DD-86F9-4739-A998-EE508D0755E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC97D253-478E-4DB4-81EB-D3D796E9CB68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC97D253-478E-4DB4-81EB-D3D796E9CB68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC97D253-478E-4DB4-81EB-D3D796E9CB68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC97D253-478E-4DB4-81EB-D3D796E9CB68}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

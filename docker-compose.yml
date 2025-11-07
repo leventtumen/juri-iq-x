@@ -1,0 +1,81 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres_db:
+    image: postgres:15
+    container_name: juriiq_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres123
+      POSTGRES_DB: juriiq
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backend/database_schema.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - juriiq_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Backend API
+  backend_api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.api
+    container_name: juriiq_backend
+    ports:
+      - "5001:5001"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=postgres_db;Port=5432;Database=juriiq;Username=postgres;Password=postgres123
+    depends_on:
+      postgres_db:
+        condition: service_healthy
+    networks:
+      - juriiq_network
+    volumes:
+      - ../documents_to_process:/app/documents_to_process
+      - ../documents_done:/app/documents_done
+      - ../documents_failed:/app/documents_failed
+
+  # Quartz Scheduler
+  scheduler:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.scheduler
+    container_name: juriiq_scheduler
+    environment:
+      - DOTNET_ENVIRONMENT=Production
+      - ConnectionStrings__DefaultConnection=Host=postgres_db;Port=5432;Database=juriiq;Username=postgres;Password=postgres123
+    depends_on:
+      postgres_db:
+        condition: service_healthy
+    networks:
+      - juriiq_network
+    volumes:
+      - ../documents_to_process:/app/documents_to_process
+      - ../documents_done:/app/documents_done
+      - ../documents_failed:/app/documents_failed
+
+  # Frontend
+  frontend:
+    build:
+      context: ./webapp
+      dockerfile: Dockerfile
+    container_name: juriiq_frontend
+    ports:
+      - "8001:80"
+    networks:
+      - juriiq_network
+
+networks:
+  juriiq_network:
+    driver: bridge
+
+volumes:
+  postgres_data:

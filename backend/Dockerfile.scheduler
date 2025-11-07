@@ -1,0 +1,39 @@
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
+
+# Install Python for AI processing
+RUN apt-get update && apt-get install -y python3 python3-pip && \
+    pip3 install --no-cache-dir nltk textblob python-docx PyPDF2
+
+# Copy solution and project files
+COPY JuriIQ.sln .
+COPY JuriIQ.Scheduler/JuriIQ.Scheduler.csproj JuriIQ.Scheduler/
+COPY JuriIQ.Core/JuriIQ.Core.csproj JuriIQ.Core/
+COPY JuriIQ.Infrastructure/JuriIQ.Infrastructure.csproj JuriIQ.Infrastructure/
+COPY JuriIQ.AI/JuriIQ.AI.csproj JuriIQ.AI/
+
+# Restore dependencies
+RUN dotnet restore JuriIQ.Scheduler/JuriIQ.Scheduler.csproj
+
+# Copy everything else
+COPY . .
+
+# Build and publish
+WORKDIR /src/JuriIQ.Scheduler
+RUN dotnet publish -c Release -o /app/publish
+
+# Runtime image
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
+WORKDIR /app
+
+# Install Python in runtime
+RUN apt-get update && apt-get install -y python3 python3-pip && \
+    pip3 install --no-cache-dir nltk textblob python-docx PyPDF2 && \
+    python3 -c "import nltk; nltk.download('punkt'); nltk.download('stopwords'); nltk.download('averaged_perceptron_tagger')"
+
+COPY --from=build /app/publish .
+
+# Create directories for documents
+RUN mkdir -p /app/documents_to_process /app/documents_done /app/documents_failed
+
+ENTRYPOINT ["dotnet", "JuriIQ.Scheduler.dll"]

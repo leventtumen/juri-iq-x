@@ -1,0 +1,30 @@
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
+
+# Copy solution and project files
+COPY JuriIQ.sln .
+COPY JuriIQ.API/JuriIQ.API.csproj JuriIQ.API/
+COPY JuriIQ.Core/JuriIQ.Core.csproj JuriIQ.Core/
+COPY JuriIQ.Infrastructure/JuriIQ.Infrastructure.csproj JuriIQ.Infrastructure/
+COPY JuriIQ.AI/JuriIQ.AI.csproj JuriIQ.AI/
+
+# Restore dependencies
+RUN dotnet restore JuriIQ.API/JuriIQ.API.csproj
+
+# Copy everything else
+COPY . .
+
+# Build and publish
+WORKDIR /src/JuriIQ.API
+RUN dotnet publish -c Release -o /app/publish
+
+# Runtime image
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
+WORKDIR /app
+COPY --from=build /app/publish .
+
+# Create directories for documents
+RUN mkdir -p /app/documents_to_process /app/documents_done /app/documents_failed
+
+EXPOSE 5001
+ENTRYPOINT ["dotnet", "JuriIQ.API.dll"]
