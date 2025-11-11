@@ -1,0 +1,6 @@
+@JuriIQBackend_HostAddress = http://localhost:5052
+
+GET {{JuriIQBackend_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
