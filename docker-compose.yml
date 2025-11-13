@@ -1,0 +1,91 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:16-alpine
+    container_name: juriiq-postgres
+    environment:
+      POSTGRES_DB: juriiq
+      POSTGRES_USER: juriiq_user
+      POSTGRES_PASSWORD: juriiq_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/scripts:/docker-entrypoint-initdb.d
+    networks:
+      - juriiq-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U juriiq_user -d juriiq"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Backend API
+  backend:
+    build:
+      context: ./src
+      dockerfile: JuriIQ.Api/Dockerfile
+    container_name: juriiq-backend
+    ports:
+      - "5001:5001"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5001
+      - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=juriiq;Username=juriiq_user;Password=juriiq_pass
+    volumes:
+      - ./documents_to_process:/app/documents_to_process
+      - ./documents_done:/app/documents_done
+      - ./documents_failed:/app/documents_failed
+      - backend_logs:/app/logs
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - juriiq-network
+    restart: unless-stopped
+
+  # Scheduler Service
+  scheduler:
+    build:
+      context: ./src
+      dockerfile: JuriIQ.Scheduler/Dockerfile
+    container_name: juriiq-scheduler
+    environment:
+      - DOTNET_ENVIRONMENT=Production
+      - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=juriiq;Username=juriiq_user;Password=juriiq_pass
+    volumes:
+      - ./documents_to_process:/app/documents_to_process
+      - ./documents_done:/app/documents_done
+      - ./documents_failed:/app/documents_failed
+      - scheduler_logs:/app/logs
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - juriiq-network
+    restart: unless-stopped
+
+  # Frontend
+  frontend:
+    build:
+      context: ./webapp
+      dockerfile: Dockerfile
+    container_name: juriiq-frontend
+    ports:
+      - "8001:8001"
+    depends_on:
+      - backend
+    networks:
+      - juriiq-network
+    restart: unless-stopped
+
+networks:
+  juriiq-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  backend_logs:
+  scheduler_logs:
